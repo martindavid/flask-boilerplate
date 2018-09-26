@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask-bcrypt = "*"
+flask-restplus = "*"
+flask-migrate = "*"
+flask-script = "*"
+flask-testing = "*"
+"psycopg2" = "*"
+stringcase = "*"
+"flake8" = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-watch = "*"
+pytest-testmon = "*"
+python-dotenv = "*"
+"autopep8" = "*"
+
+[requires]
+python_version = "3.7"
