@@ -5,9 +5,6 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 from app.main import create_app, db
-from app.main.model import base_model, enquiry, enquiry_service_list, \
-    enquiry_contact, helper_table, warehouse_additional_info, \
-    warehouse_contact, warehouse_image, warehouse, warehouse_service
 
 app = create_app(os.getenv('ENV') or 'development')
 app.app_context().push()

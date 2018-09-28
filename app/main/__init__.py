@@ -3,8 +3,6 @@ from app.main.controller.v1 import API_V1
 from .extensions import db, bcrypt
 from .config import config_by_name
 
-__all__ = ['create_app']
-
 
 def create_app(config_name):
     app = Flask(__name__)
