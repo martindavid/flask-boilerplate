@@ -1,4 +1,9 @@
 import pytest
+import os
+from app.main import create_app, extension
+from app.tests import setup_db, teardown_db, clean_db
+
+ENV = os.environ.get('ENV', 'development')
 
 
 @pytest.fixture(scope="session")
@@ -7,19 +12,7 @@ def app():
 
     Initialized with testing config file.
     """
-    yield create_app(config_file=config.TESTING_CONF_PATH)
-
-
-@pytest.fixture(scope="function")
-def files_folder(app):
-    """
-    Creates a clean upload folder
-    """
-    filesdir = app.config['SKYLINES_FILES_PATH']
-    if os.path.exists(filesdir):
-        shutil.rmtree(filesdir)
-
-    os.makedirs(filesdir)
+    yield create_app(ENV)
 
 
 @pytest.fixture(scope="session")
@@ -30,10 +23,9 @@ def db(app):
     and shared among all tests. Use `db_session` fixture to get clean database
     before each test.
     """
-    assert isinstance(app, SkyLines)
 
     setup_db(app)
-    yield database.db
+    yield extension.db
     teardown_db()
 
 
@@ -44,7 +36,6 @@ def db_session(db, app):
 
     Return sqlalchemy session.
     """
-    assert isinstance(app, SkyLines)
 
     with app.app_context():
         clean_db()
